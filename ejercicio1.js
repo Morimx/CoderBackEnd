@@ -4,18 +4,21 @@ let edad = 34;
 const precio = "$99.90";
 const series = ["The Walking Dead", "The Sopranos", "The Office"];
 const peliculas = [
-  {
-    titulo: "avengers",
-    protagonistas: "robert downey jr",
-  },
-  {
-    titulo: "Spider-man",
-    protagonistas: "Tom Holland",
-  },
-  {
-    titulo: "ejemplo",
-    protagonistas: "ejemplo1",
-  },
+    {
+        nombre: "avengers",
+        anioEstreno: 2012
+        protagonistas: ["Robert Downey Jr.", "Chris Evans", "Mark Ruffalo"],
+    },
+    {
+        titulo: "Spider-Man",
+        anioEstreno: 2002
+        protagonistas: ["Tobey Maguire", "Willem Dafoe"],
+    },
+    {
+        titulo: "Seven",
+        anioEstreno: 1995
+        protagonistas: ["Brad Pitt", "Morgan Freeman"],
+    },
 ];
 
 console.log(nombre, apellido, edad, precio, series, peliculas);
