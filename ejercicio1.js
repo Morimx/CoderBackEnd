@@ -6,14 +6,17 @@ const series = ["The Walking Dead", "The Sopranos", "The Office"];
 const peliculas = [
   {
     titulo: "avengers",
+    fecha: 2009,
     protagonistas: "robert downey jr",
   },
   {
     titulo: "Spider-man",
+    fecha: 2021,
     protagonistas: "Tom Holland",
   },
   {
     titulo: "ejemplo",
+    fecha: undefined,
     protagonistas: "ejemplo1",
   },
 ];
