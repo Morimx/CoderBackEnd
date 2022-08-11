@@ -18,5 +18,7 @@ const crearMultiplicador = (num) => {
   };
 };
 
-const multiplicador = crearMultiplicador(2);
-console.log(multiplicador(5));
+const duplicar = crearMultiplicador(2);
+const triplicar = crearMultiplicador(3);
+console.log(duplicar(5));
+console.log(triplicar(5));
