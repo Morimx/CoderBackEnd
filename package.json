@@ -1,0 +1,19 @@
+{
+  "name": "coder-backend",
+  "version": "1.0.0",
+  "description": "Comenzando el proyecto para el curso de backend de coderhouse",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Morimx/CoderBackEnd.git"
+  },
+  "author": "Claudio Fernandez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Morimx/CoderBackEnd/issues"
+  },
+  "homepage": "https://github.com/Morimx/CoderBackEnd#readme"
+}
