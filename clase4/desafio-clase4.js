@@ -44,18 +44,27 @@ class Contenedor {
     fs.writeFileSync(this.archivo, "[]");
     return "[]";
   }
+
+  getRandom() {
+    const data = fs.readFileSync(this.archivo, "utf-8");
+    const dataParseada = JSON.parse(data);
+    let random = dataParseada[Math.floor(Math.random() * dataParseada.length)];
+    return random;
+  }
 }
 
-const contenedor = new Contenedor("productos.txt");
+// const contenedor = new Contenedor("productos.txt");
 
-const producto1 = {
-  title: "Escuadra",
-  price: 123.45,
-};
+// const producto1 = {
+//   title: "Escuadra",
+//   price: 123.45,
+// };
 
-contenedor.save(producto1);
-console.log(contenedor.getById(3));
-contenedor.deleteById(3);
-console.log(contenedor.getAll());
+// contenedor.save(producto1);
+// console.log(contenedor.getById(3));
+// contenedor.deleteById(3);
+// console.log(contenedor.getAll());
 // contenedor.deleteAll();
 // contenedor.getAll();
+
+module.exports = Contenedor;
