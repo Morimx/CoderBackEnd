@@ -1,1 +1,37 @@
-[{"id":1,"title":"Escuadra","price":123.45}]
+[
+  {
+    "id": 1,
+    "title": "compas",
+    "price": 500
+  },
+  {
+    "id": 4,
+    "title": "compas",
+    "price": 500
+  },
+  {
+    "id": 5,
+    "title": "compas",
+    "price": 500
+  },
+  {
+    "id": 6,
+    "title": "compas",
+    "price": 500
+  },
+  {
+    "id": 2,
+    "title": "regla",
+    "price": 300
+  },
+  {
+    "id": 3,
+    "title": "tambor",
+    "price": 300
+  },
+  {
+    "id": 7,
+    "title": "camion",
+    "price": 300
+  }
+]
