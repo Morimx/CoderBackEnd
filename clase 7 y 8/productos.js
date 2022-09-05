@@ -5,35 +5,50 @@ const Contenedor = require("../clase4/desafio-clase4");
 const constructor = new Contenedor("./productos.txt");
 
 router.get("/", (req, res) => {
-  res.send(constructor.getAll());
+  try {
+    res.send(constructor.getAll());
+  } catch (err) {
+    res.status(404).send(err);
+  }
 });
 
 router.get("/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(constructor.getById(parseInt(id)));
+  try {
+    const { id } = req.params;
+    res.send(constructor.getById(parseInt(id)));
+  } catch (err) {
+    res.status(404).send(err);
+  }
 });
 
 router.post("/", (req, res) => {
-  const data = req.body;
-  const ID = constructor.save(data);
-  res.send({ ID });
+  try {
+    const data = req.body;
+    const ID = constructor.save(data);
+    res.send({ ID });
+  } catch (err) {
+    res.status(404).send(err);
+  }
 });
 
 router.put("/:id", (req, res) => {
   try {
     const { id } = req.params;
     const prodNuevo = req.body;
-    let prodAnterior = constructor.getById(parseInt(id));
-    prodAnterior = prodNuevo;
-    res.send(constructor.updateById(id, prodAnterior));
+    const idInt = parseInt(id);
+    res.send(constructor.updateById(idInt, prodNuevo));
   } catch (err) {
-    res.send("No se encuentra el id requerido" + " " + err);
+    res.status(404).send(err.msg);
   }
 });
 
 router.delete("/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(constructor.deleteById(parseInt(id)));
+  try {
+    const { id } = req.params;
+    res.send(constructor.deleteById(parseInt(id)));
+  } catch (err) {
+    res.status(404).send(err.msg);
+  }
 });
 
 module.exports = router;
