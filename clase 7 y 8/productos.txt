@@ -22,5 +22,11 @@
     "title": "test",
     "price": "34",
     "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-512.png"
+  },
+  {
+    "id": 5,
+    "title": "rewr",
+    "price": "12423",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-512.png"
   }
 ]
