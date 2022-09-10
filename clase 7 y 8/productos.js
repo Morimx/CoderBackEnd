@@ -24,8 +24,8 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   try {
     const data = req.body;
-    const ID = constructor.save(data);
-    res.send({ ID });
+    constructor.save(data);
+    res.redirect("/");
   } catch (err) {
     res.status(404).send(err);
   }

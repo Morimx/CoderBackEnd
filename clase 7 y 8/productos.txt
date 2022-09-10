@@ -1,37 +1,26 @@
 [
   {
     "id": 1,
-    "title": "compas",
-    "price": 500
-  },
-  {
-    "id": 4,
-    "title": "compas",
-    "price": 500
-  },
-  {
-    "id": 5,
-    "title": "compas",
-    "price": 500
-  },
-  {
-    "id": 6,
-    "title": "compas",
-    "price": 500
+    "title": "Calculadora",
+    "price": "500",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png"
   },
   {
     "id": 2,
-    "title": "regla",
-    "price": 300
+    "title": "Compas",
+    "price": "100",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-512.png"
   },
   {
     "id": 3,
-    "title": "tambor",
-    "price": 300
+    "title": "Escuadra",
+    "price": "400",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-512.png"
   },
   {
-    "id": 7,
-    "title": "camion",
-    "price": 300
+    "id": 4,
+    "title": "test",
+    "price": "34",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-512.png"
   }
 ]
