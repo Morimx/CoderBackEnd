@@ -1,7 +1,7 @@
 const express = require("express");
 const { Router } = express;
 const router = Router();
-const Contenedor = require("../clase4/desafio-clase4");
+const Contenedor = require("./constructor");
 const constructor = new Contenedor("./productos.txt");
 
 router.get("/", (req, res) => {

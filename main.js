@@ -3,7 +3,7 @@ const handlebars = require("express-handlebars");
 const app = express();
 const fs = require("fs");
 const fsPromise = fs.promises;
-const Contenedor = require("../clase4/desafio-clase4");
+const Contenedor = require("./constructor");
 const constructor = new Contenedor("./productos.txt");
 const productosRouter = require("./productos");
 app.use(express.urlencoded({ extended: true }));
