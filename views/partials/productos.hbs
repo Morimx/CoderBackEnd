@@ -1,0 +1,31 @@
+<div class="bg-dark mx-5">
+  {{#if compras}}
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre del producto</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Foto</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each compras}}
+          <tr>
+            <th scope="row">{{this.id}}</th>
+            <td>{{this.title}}</td>
+            <td>{{this.price}}</td>
+            <td><img
+                rel="icon"
+                src="{{this.foto}}"
+                style="width: 30px; height: 30px;"
+              /></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{else}}
+    <h1> {{noProd}}</h1>
+  {{/if}}
+
+</div>
