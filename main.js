@@ -6,9 +6,33 @@ const fsPromise = fs.promises;
 const Contenedor = require("./constructor");
 const constructor = new Contenedor("./productos.txt");
 const productosRouter = require("./productos");
+const { Server: SocketServer } = require("socket.io");
+const { Server: HttpServer } = require("http");
+const httpServer = new HttpServer(app);
+const io = new SocketServer(httpServer);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static("views"));
 
+//Array del chat
+let mensajes = [{msg: "Bienvenido al chat"}];
+
+/////////////////////////
+// SOCKET IO ////////////
+/////////////////////////
+
+io.on("connection", (socket) => {
+  console.log("Se ha conectado un cliente");
+  socket.emit('mensaje', mensajes);
+  socket.on('mensaje', (data) => {
+    mensajes.push(data);
+    io.sockets.emit('mensaje', mensajes);
+  });
+});
+
+/////////////////////////
+// HANDLE BARS VIEWS/////
+/////////////////////////
 app.engine(
   "hbs",
   handlebars.engine({
@@ -17,10 +41,6 @@ app.engine(
     defaultLayout: "main",
   })
 );
-
-/////////////////////////
-// HANDLE BARS VIEWS/////
-/////////////////////////
 
 app.set("views", __dirname + "/views");
 app.set("view engine", "hbs");
@@ -37,8 +57,14 @@ app.get("/", (req, res) => {
   });
 });
 
+/////////////////////////
+// EXPRESS ROUTER ///////
+/////////////////////////
 app.use("/productos", productosRouter);
 
-app.listen(3000, () => {
+/////////////////////////
+// SERVER ON ////////////
+/////////////////////////
+httpServer.listen(3000, () => {
   console.log("Server ON");
 });

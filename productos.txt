@@ -25,8 +25,14 @@
   },
   {
     "id": 5,
-    "title": "ewrwer",
-    "price": "32423",
-    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-256.png"
+    "title": "goku",
+    "price": "25",
+    "foto": "https://seeklogo.com/images/G/goku-hair-logo-CCF6366E7C-seeklogo.com.png?v=637728271820000000"
+  },
+  {
+    "id": 6,
+    "title": "asd",
+    "price": "234",
+    "foto": "https://cdn3.iconfinder.com/data/icons/education-209/64/ruler-triangle-stationary-school-512.png"
   }
 ]
