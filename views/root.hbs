@@ -10,11 +10,11 @@
       crossorigin="anonymous"
     />
     <link rel="root.css" href="../assets/root.css">
+
     <title>{{title}}</title>
   </head>
-  <body class="bg-dark">
+<body class="bg-dark">
 
-    
 <div class="container text-center ">
    <div class="s3-m-10 s3-p-8">
   <div class=" ">
@@ -54,7 +54,15 @@
 </form>
 
 <hr>
-{{> productos}}
-  </body>
+<div>
+  <div class="row">
+  <div class="col-6">{{> productos}}</div>
+  <div class="col-6">{{> chat}}</div>
+  </div>
+</div>
+
+
+
+</body>
 
 </html>

@@ -37,15 +37,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// app.get("/productos", (req, res) => {
-//   res.render("productos", {
-//     layout: "productos",
-//     title: "Productos",
-//     compras: constructor.getAll().sort((a, b) => a.id - b.id),
-//     noProd: "No hay productos",
-//   });
-// });
-
 app.use("/productos", productosRouter);
 
 app.listen(3000, () => {

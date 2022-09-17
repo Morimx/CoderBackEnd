@@ -1,3 +1,4 @@
+
 .narrowtxt {line-height:18px;}
 
 .panel  {border-radius: 5px !important; }
@@ -10,3 +11,7 @@
   .btn-block {width:60% !important;}
 }
 
+.test{
+  background-color: #f5f5f5;
+  color: rgb(255, 255, 255)
+}
