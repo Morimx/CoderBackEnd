@@ -8,10 +8,23 @@ function render(data){
     
 }
 
+
+function renderProductos(data){
+  const html = data.map(elem => `
+  <tr>
+  <th >${elem.id}</th>
+  <td>${elem.title}</td>
+  <td>$${elem.price}</td>
+  <td><img rel="icon" src="${elem.foto}" style="width: 30px; height: 30px;" /></td>
+  </tr>`).join(' ');
+  document.getElementById('lista-productos').innerHTML = html;
+}
+
 const socket = io.connect()
-socket.on('new-message', (data) => {
-  render(data);
-})
+socket.on('new-message', (data) => {render(data)})
+socket.on('new-product', (data) => {
+  console.log(data)
+  renderProductos(data)})
 
 function chatFunc(event){
   const fecha = new Date().toLocaleDateString()+ ' ' +new Date().toTimeString()
@@ -23,5 +36,18 @@ function chatFunc(event){
   }
   socket.emit('new-message',mensaje);
   document.getElementById('chatMsg').value = '';
+  return false;
+}
+
+function prodFunc(event){
+  const producto = {
+      title:document.getElementById('InputFName').value,
+      price:document.getElementById('precio').value,
+      foto:document.getElementById('InputPic').value
+  }
+  socket.emit('new-product',producto);
+  document.getElementById('InputFName').value = '';
+  document.getElementById('precio').value = '';
+  document.getElementById('InputPic').value = '';
   return false;
 }

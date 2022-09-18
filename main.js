@@ -24,6 +24,7 @@ let mensajes = [{email: "bienvenida@chat.com", msg: "Bienvenido al chat", date: 
 io.on("connection", (socket) => {
   console.log("Se ha conectado un cliente");
   socket.emit('new-message', mensajes);
+  socket.emit('new-product', constructor.getAll());
   socket.on('new-message', (data) => {
     mensajes.push(data);
     io.sockets.emit('new-message', mensajes);
@@ -31,6 +32,11 @@ io.on("connection", (socket) => {
       if (err) throw err;
       console.log('The file has been saved!');
     });
+  });
+  socket.on('new-product', async (data) => {
+   await constructor.save(data);
+   const productos = await constructor.getAll();
+    io.sockets.emit('new-product', productos);
   });
 });
 

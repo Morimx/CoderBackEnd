@@ -23,7 +23,7 @@
           </div>
           <div class="panel-body">
 
-            <form action="/productos" method="POST">
+            <form onsubmit="return prodFunc(this)">
               <div class="form-group ">
                 <label style="color:white;">Nombre del producto</label>
                 <input name="title" type="text" class="form-control" id="InputFName"

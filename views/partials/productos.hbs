@@ -9,19 +9,12 @@
         <th scope="col">Foto</th>
       </tr>
     </thead>
-    <tbody>
-      {{#each compras}}
-      <tr>
-        <th scope="row">{{this.id}}</th>
-        <td>{{this.title}}</td>
-        <td>${{this.price}}</td>
-        <td><img rel="icon" src="{{this.foto}}" style="width: 30px; height: 30px;" /></td>
-      </tr>
-      {{/each}}
+    <tbody id="lista-productos">
+
     </tbody>
   </table>
   {{else}}
-  <h1> {{noProd}}</h1>
+  <h1 class="text-center" style="color: white; border-style: solid"> {{noProd}}</h1>
   {{/if}}
 
 </div>
