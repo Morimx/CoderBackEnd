@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.static("views"));
 
 //Array del chat
-let mensajes = [{msg: "Bienvenido al chat"}];
+let mensajes = [{email: "bienvenida@chat.com", msg: "Bienvenido al chat", date: "01/01/2021 00:00:00"}];
 
 /////////////////////////
 // SOCKET IO ////////////
@@ -23,10 +23,14 @@ let mensajes = [{msg: "Bienvenido al chat"}];
 
 io.on("connection", (socket) => {
   console.log("Se ha conectado un cliente");
-  socket.emit('mensaje', mensajes);
-  socket.on('mensaje', (data) => {
+  socket.emit('new-message', mensajes);
+  socket.on('new-message', (data) => {
     mensajes.push(data);
-    io.sockets.emit('mensaje', mensajes);
+    io.sockets.emit('new-message', mensajes);
+    fs.writeFile('./mensajes.txt', JSON.stringify(mensajes), (err) => {
+      if (err) throw err;
+      console.log('The file has been saved!');
+    });
   });
 });
 

@@ -1,0 +1,1 @@
+[{"email":"bienvenida@chat.com","msg":"Bienvenido al chat","date":"01/01/2021 00:00:00"},{"email":"asd@asddfs","msg":"test","date":"17/9/2022 21:45:50"},{"email":"asd@asddfs","msg":"bcv","date":"17/9/2022 21:45:51"},{"email":"asd@asddfs","msg":"vnfgn","date":"17/9/2022 21:45:52"}]
