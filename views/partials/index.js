@@ -22,9 +22,8 @@ function renderProductos(data){
 
 const socket = io.connect()
 socket.on('new-message', (data) => {render(data)})
-socket.on('new-product', (data) => {
-  console.log(data)
-  renderProductos(data)})
+socket.on('new-product', (data) => {renderProductos(data)})
+
 
 function chatFunc(event){
   const fecha = new Date().toLocaleDateString()+ ' ' +new Date().toTimeString()

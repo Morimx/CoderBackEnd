@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "email": "nbasael",
+    "password": "123"
+  },
+  {
+    "id": 2,
+    "email": "ad",
+    "password": "e"
+  },
+  {
+    "id": 3,
+    "email": "aa",
+    "password": "a"
+  },
+  {
+    "id": 4,
+    "email": "aac",
+    "password": "a"
+  },
+  {
+    "id": 5,
+    "email": "aacv",
+    "password": "a"
+  },
+  {
+    "id": 6,
+    "isLogged": false,
+    "email": "aacvbb",
+    "password": "ad"
+  },
+  {
+    "id": 7,
+    "isLogged": false,
+    "email": "aacvbvbbcbbb",
+    "password": "f"
+  },
+  {
+    "id": 8,
+    "isLogged": false,
+    "email": "xb",
+    "password": "x"
+  }
+]

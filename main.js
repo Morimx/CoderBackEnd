@@ -3,16 +3,21 @@ const handlebars = require("express-handlebars");
 const app = express();
 const fs = require("fs");
 const fsPromise = fs.promises;
+
 const Contenedor = require("./constructor");
-const constructor = new Contenedor("./productos.txt");
-const productosRouter = require("./productos");
+const constructor = new Contenedor("./data/productos.txt");
+const productosRouter = require("./src/routes/productos");
+
 const { Server: SocketServer } = require("socket.io");
 const { Server: HttpServer } = require("http");
+const RoutesAPI = require("./src/routes/RoutesAPI");
 const httpServer = new HttpServer(app);
 const io = new SocketServer(httpServer);
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("views"));
+
 
 //Array del chat
 let mensajes = [{email: "bienvenida@chat.com", msg: "Bienvenido al chat", date: "01/01/2021 00:00:00"}];
@@ -28,7 +33,7 @@ io.on("connection", (socket) => {
   socket.on('new-message', (data) => {
     mensajes.push(data);
     io.sockets.emit('new-message', mensajes);
-    fs.writeFile('./mensajes.txt', JSON.stringify(mensajes), (err) => {
+    fs.writeFile('./data/mensajes.txt', JSON.stringify(mensajes), (err) => {
       if (err) throw err;
       console.log('The file has been saved!');
     });
@@ -67,9 +72,24 @@ app.get("/", (req, res) => {
   });
 });
 
+app.use("/signup", (req, res) => {
+  res.render("signup", {
+    layout: "signup"
+  });
+});
+
+app.use('/api', RoutesAPI);
+
+app.use("/login", (req, res) => {
+  res.render("login", {
+    layout: "login"
+  });
+});
+
 /////////////////////////
 // EXPRESS ROUTER ///////
 /////////////////////////
+
 app.use("/productos", productosRouter);
 
 /////////////////////////

@@ -1,8 +1,8 @@
 const express = require("express");
 const { Router } = express;
 const router = Router();
-const Contenedor = require("./constructor");
-const constructor = new Contenedor("./productos.txt");
+const Contenedor = require("../../constructor");
+const constructor = new Contenedor("./data/productos.txt");
 
 router.get("/", (req, res) => {
   try {
