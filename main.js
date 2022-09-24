@@ -90,7 +90,7 @@ app.use("/login", (req, res) => {
 // EXPRESS ROUTER ///////
 /////////////////////////
 
-app.use("/productos", productosRouter);
+app.use("/api/productos", productosRouter);
 
 /////////////////////////
 // SERVER ON ////////////

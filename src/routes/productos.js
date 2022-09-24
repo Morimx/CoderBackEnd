@@ -25,7 +25,7 @@ router.post("/", (req, res) => {
   try {
     const data = req.body;
     constructor.save(data);
-    res.redirect("/");
+    res.status(200).send("Producto agregado");
   } catch (err) {
     res.status(404).send(err);
   }

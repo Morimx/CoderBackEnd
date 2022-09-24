@@ -1,6 +1,3 @@
-const $formSignUp = $('#signUpForm');
-const $btnSignUp = $('#btnSignUp');
-
 const userRegistryAPI = params => axios.get(`http://localhost:3000/api/signup`, {
     params,
 });
