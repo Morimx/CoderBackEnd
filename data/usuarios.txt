@@ -2,22 +2,27 @@
   {
     "id": 1,
     "isLogged": false,
-    "administrador": false,
+    "administrador": true,
     "email": "Claudio@test.com",
     "password": "a"
   },
   {
     "id": 2,
     "isLogged": false,
-    "administrador": false,
-    "email": "xcv",
-    "password": "xcv"
+    "administrador": true,
+    "email": "a",
+    "password": "a"
   },
   {
     "id": 3,
     "isLogged": false,
     "administrador": false,
-    "email": "a",
+    "email": "ab",
     "password": "a"
+  },
+  {
+    "id": 4,
+    "isLogged": false,
+    "administrador": false
   }
 ]

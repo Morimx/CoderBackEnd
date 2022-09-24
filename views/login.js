@@ -12,7 +12,7 @@ const loginx = async e => {
         const consulta = await userLoginAPI(user);
         if(consulta){
             localStorage.setItem("email", user.email);
-            localStorage.setItem("Password", user.password);
+            localStorage.setItem("password", user.password);
             localStorage.setItem("isLogged", "yes");
             window.location.href = '/';
         }

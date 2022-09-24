@@ -78,6 +78,12 @@ app.use("/signup", (req, res) => {
   });
 });
 
+app.use("/productosrerandom", (req, res) => {
+  res.render("productosHTML", {
+    layout: "productosHTML"});
+});
+
+
 app.use('/api', RoutesAPI);
 
 app.use("/login", (req, res) => {
@@ -91,6 +97,7 @@ app.use("/login", (req, res) => {
 /////////////////////////
 
 app.use("/api/productos", productosRouter);
+
 
 /////////////////////////
 // SERVER ON ////////////

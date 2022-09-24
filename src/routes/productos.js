@@ -1,5 +1,7 @@
 const express = require("express");
 const { Router } = express;
+const Usuarioreg = require("../../registrarusuario");
+const usuario = new Usuarioreg("./data/usuarios.txt");
 const router = Router();
 const Contenedor = require("../../constructor");
 const constructor = new Contenedor("./data/productos.txt");
@@ -14,18 +16,27 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   try {
+    if (usuario.get(req.headers).administrador) {
     const { id } = req.params;
-    res.send(constructor.getById(parseInt(id)));
-  } catch (err) {
+    res.send(constructor.getById(parseInt(id)));}
+    else{
+      res.status(401).send("No autorizado");
+    }
+  }
+  catch (err) {
     res.status(404).send(err);
   }
 });
 
 router.post("/", (req, res) => {
   try {
+    if (usuario.get(req.headers).administrador){
     const data = req.body;
     constructor.save(data);
     res.status(200).send("Producto agregado");
+  } else{
+    res.status(401).send("No autorizado");
+  }
   } catch (err) {
     res.status(404).send(err);
   }
