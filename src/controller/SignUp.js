@@ -1,7 +1,7 @@
 const registrarusuario = require('../../registrarusuario');
-const usuario = new registrarusuario('./data/usuarios.txt');
+const usuario = new registrarusuario('./data/usuarios.json');
 
-const SignUp = async ( req, res ) => {
+const SignUp = async (req, res) => {
     try {
         const { query } = req;
         await usuario.save(query);

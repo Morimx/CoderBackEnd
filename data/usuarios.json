@@ -9,20 +9,8 @@
   {
     "id": 2,
     "isLogged": false,
-    "administrador": true,
-    "email": "a",
-    "password": "a"
-  },
-  {
-    "id": 3,
-    "isLogged": false,
     "administrador": false,
-    "email": "ab",
+    "email": "a@a.a",
     "password": "a"
-  },
-  {
-    "id": 4,
-    "isLogged": false,
-    "administrador": false
   }
 ]

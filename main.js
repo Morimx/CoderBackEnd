@@ -5,14 +5,16 @@ const fs = require("fs");
 const fsPromise = fs.promises;
 
 const Contenedor = require("./constructor");
-const constructor = new Contenedor("./data/productos.txt");
-const productosRouter = require("./src/routes/productos");
+const constructor = new Contenedor("./data/productos.json");
 
 const { Server: SocketServer } = require("socket.io");
 const { Server: HttpServer } = require("http");
-const RoutesAPI = require("./src/routes/RoutesAPI");
 const httpServer = new HttpServer(app);
 const io = new SocketServer(httpServer);
+
+const productosRouter = require("./src/routes/productos");
+const RoutesAPI = require("./src/routes/RoutesAPI");
+const carritoRouter = require("./src/routes/carrito");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,7 +22,7 @@ app.use(express.static("views"));
 
 
 //Array del chat
-let mensajes = [{email: "bienvenida@chat.com", msg: "Bienvenido al chat", date: "01/01/2021 00:00:00"}];
+let mensajes = [{ email: "bienvenida@chat.com", msg: "Bienvenido al chat", date: "01/01/2021 00:00:00" }];
 
 /////////////////////////
 // SOCKET IO ////////////
@@ -39,8 +41,8 @@ io.on("connection", (socket) => {
     });
   });
   socket.on('new-product', async (data) => {
-   await constructor.save(data);
-   const productos = await constructor.getAll();
+    await constructor.save(data);
+    const productos = await constructor.getAll();
     io.sockets.emit('new-product', productos);
   });
 });
@@ -80,11 +82,11 @@ app.use("/signup", (req, res) => {
 
 app.use("/productosrerandom", (req, res) => {
   res.render("productosHTML", {
-    layout: "productosHTML"});
+    layout: "productosHTML"
+  });
 });
 
 
-app.use('/api', RoutesAPI);
 
 app.use("/login", (req, res) => {
   res.render("login", {
@@ -96,7 +98,9 @@ app.use("/login", (req, res) => {
 // EXPRESS ROUTER ///////
 /////////////////////////
 
+app.use('/api', RoutesAPI);
 app.use("/api/productos", productosRouter);
+app.use("/api/carrito", carritoRouter);
 
 
 /////////////////////////

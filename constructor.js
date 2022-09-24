@@ -63,20 +63,28 @@ class Contenedor {
     fs.writeFileSync(this.archivo, JSON.stringify(productosFiltrados, null, 2));
     return mensaje;
   }
-}
 
-// const contenedor = new Contenedor("productos.txt");
+  saveInCarrito(id, objetoAdd) {
+    const mensaje = "Se agrego el producto al carrito";
+    const contenido = fs.readFileSync(this.archivo, "utf-8");
+    const dataParseada = JSON.parse(contenido);
+    let carrito = dataParseada.find((objeto) => objeto.id == id);
+    carrito.productos.push(objetoAdd);
+    fs.writeFileSync(this.archivo, JSON.stringify(dataParseada, null, 2));
+    return mensaje;
+  }
 
-// const producto1 = {
-//   title: "Escuadra",
-//   price: 123.45,
-// };
+  deleteProduct(id, idProducto) {
+    const mensaje = "Se elimino el producto del carrito";
+    const contenido = fs.readFileSync(this.archivo, "utf-8");
+    const dataParseada = JSON.parse(contenido);
+    let carrito = dataParseada.find((objeto) => objeto.id == id);
+    let productos = carrito.productos.filter((objeto) => objeto.id != idProducto);
+    carrito.productos = productos;
+    fs.writeFileSync(this.archivo, JSON.stringify(dataParseada, null, 2));
+    return mensaje;
+  }
 
-// contenedor.save(producto1);
-// console.log(contenedor.getById(3));
-// contenedor.deleteById(3);
-// console.log(contenedor.getAll());
-// contenedor.deleteAll();
-// contenedor.getAll();
+};
 
 module.exports = Contenedor;
