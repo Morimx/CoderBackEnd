@@ -1,8 +1,20 @@
 [
   {
+    "id": 1,
+    "timeStamp": 1664055102049,
+    "title": "Escuadra",
+    "descripcion": "Es una escuadra que mas va a ser",
+    "codigo": "342",
+    "foto": "http://asdad",
+    "stock": 10
+  },
+  {
     "id": 2,
-    "title": "sdf",
-    "price": "3333333333333",
-    "foto": "http://asdad"
+    "timeStamp": 1664055140610,
+    "title": "Escuadra",
+    "descripcion": "Es una escuadra que mas va a ser",
+    "codigo": "342",
+    "foto": "http://asdad",
+    "stock": 10
   }
 ]

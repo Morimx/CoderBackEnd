@@ -9,9 +9,22 @@ class Contenedor {
     const contenido = fs.readFileSync(this.archivo, "utf-8");
     const productos = JSON.parse(contenido);
     const id = productos.length + 1;
-    const producto = { id, ...objeto };
+    const timeStamp = Date.now();
+    const producto = { id, timeStamp, ...objeto };
     productos.push(producto);
     fs.writeFileSync(this.archivo, JSON.stringify(productos, null, 2));
+    return id;
+  }
+
+  saveCarrito() {
+    const contenido = fs.readFileSync(this.archivo, "utf-8");
+    const productosParseados = JSON.parse(contenido);
+    const id = productosParseados.length + 1;
+    const timeStamp = Date.now();
+    const productos = [];
+    const producto = { id, timeStamp, productos };
+    productosParseados.push(producto);
+    fs.writeFileSync(this.archivo, JSON.stringify(productosParseados, null, 2));
     return id;
   }
 

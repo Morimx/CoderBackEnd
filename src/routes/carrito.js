@@ -8,7 +8,8 @@ const productosDB = new Contenedor("./data/productos.json");
 router.post("/", (req, res) => {
     try {
         const data = {};
-        res.status(200).send("Carrito creado con el id: " + constructor.save(data));
+        res.status(200).send("Carrito creado con el id: " + 
+        constructor.saveCarrito(data));
     } catch (err) {
         res.status(401).send(err);
     }
