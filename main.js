@@ -80,14 +80,6 @@ app.use("/signup", (req, res) => {
   });
 });
 
-app.use("/productosrerandom", (req, res) => {
-  res.render("productosHTML", {
-    layout: "productosHTML"
-  });
-});
-
-
-
 app.use("/login", (req, res) => {
   res.render("login", {
     layout: "login"
