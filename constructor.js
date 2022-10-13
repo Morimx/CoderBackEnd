@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from "fs";
 
 class Contenedor {
   constructor(archivo) {
@@ -9,22 +9,9 @@ class Contenedor {
     const contenido = fs.readFileSync(this.archivo, "utf-8");
     const productos = JSON.parse(contenido);
     const id = productos.length + 1;
-    const timeStamp = Date.now();
-    const producto = { id, timeStamp, ...objeto };
+    const producto = { id, ...objeto };
     productos.push(producto);
     fs.writeFileSync(this.archivo, JSON.stringify(productos, null, 2));
-    return id;
-  }
-
-  saveCarrito() {
-    const contenido = fs.readFileSync(this.archivo, "utf-8");
-    const productosParseados = JSON.parse(contenido);
-    const id = productosParseados.length + 1;
-    const timeStamp = Date.now();
-    const productos = [];
-    const producto = { id, timeStamp, productos };
-    productosParseados.push(producto);
-    fs.writeFileSync(this.archivo, JSON.stringify(productosParseados, null, 2));
     return id;
   }
 
@@ -76,28 +63,8 @@ class Contenedor {
     fs.writeFileSync(this.archivo, JSON.stringify(productosFiltrados, null, 2));
     return mensaje;
   }
+}
 
-  saveInCarrito(id, objetoAdd) {
-    const mensaje = "Se agrego el producto al carrito";
-    const contenido = fs.readFileSync(this.archivo, "utf-8");
-    const dataParseada = JSON.parse(contenido);
-    let carrito = dataParseada.find((objeto) => objeto.id == id);
-    carrito.productos.push(objetoAdd);
-    fs.writeFileSync(this.archivo, JSON.stringify(dataParseada, null, 2));
-    return mensaje;
-  }
 
-  deleteProduct(id, idProducto) {
-    const mensaje = "Se elimino el producto del carrito";
-    const contenido = fs.readFileSync(this.archivo, "utf-8");
-    const dataParseada = JSON.parse(contenido);
-    let carrito = dataParseada.find((objeto) => objeto.id == id);
-    let productos = carrito.productos.filter((objeto) => objeto.id != idProducto);
-    carrito.productos = productos;
-    fs.writeFileSync(this.archivo, JSON.stringify(dataParseada, null, 2));
-    return mensaje;
-  }
 
-};
-
-module.exports = Contenedor;
+export default Contenedor;

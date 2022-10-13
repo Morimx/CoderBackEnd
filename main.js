@@ -1,20 +1,28 @@
-const express = require("express");
-const handlebars = require("express-handlebars");
+//Libs
+import express from 'express';
+import handlebars from "express-handlebars";
+import fs from 'fs';
 const app = express();
-const fs = require("fs");
-const fsPromise = fs.promises;
 
-const Contenedor = require("./constructor");
-const constructor = new Contenedor("./data/productos.json");
+//Config DB
+import knex from 'knex';
+import connection from './dbConnection/db.js';
+const dbConnection = knex(connection)
 
-const { Server: SocketServer } = require("socket.io");
-const { Server: HttpServer } = require("http");
-const httpServer = new HttpServer(app);
-const io = new SocketServer(httpServer);
 
-const productosRouter = require("./src/routes/productos");
-const RoutesAPI = require("./src/routes/RoutesAPI");
-const carritoRouter = require("./src/routes/carrito");
+// Constructor de productos y router
+import Contenedor from './constructor.js';
+const constructor = new Contenedor("./data/productos.txt");
+import { productosRouter } from './src/routes/productos.js';
+
+//Socket server
+import { Server } from 'socket.io';
+import { createServer } from 'http';
+//const { Server: SocketServer } = require("socket.io");
+//const { Server: HttpServer } = require("http");
+const httpServer = createServer(app);
+const io = new Server(httpServer);
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -54,12 +62,12 @@ app.engine(
   "hbs",
   handlebars.engine({
     extname: "hbs",
-    layoutsDir: __dirname + "/views",
+    layoutsDir: "./views",
     defaultLayout: "main",
   })
 );
 
-app.set("views", __dirname + "/views");
+app.set("views", "./views");
 app.set("view engine", "hbs");
 
 app.get("/", (req, res) => {
@@ -70,19 +78,7 @@ app.get("/", (req, res) => {
     addProd: "Añadir Producto",
     compras: constructor.getAll().sort((a, b) => a.id - b.id),
     noProd: "No hay productos",
-    partialsPath: __dirname + "/views/partials",
-  });
-});
-
-app.use("/signup", (req, res) => {
-  res.render("signup", {
-    layout: "signup"
-  });
-});
-
-app.use("/login", (req, res) => {
-  res.render("login", {
-    layout: "login"
+    partialsPath: "./views/partials",
   });
 });
 
@@ -90,10 +86,7 @@ app.use("/login", (req, res) => {
 // EXPRESS ROUTER ///////
 /////////////////////////
 
-app.use('/api', RoutesAPI);
-app.use("/api/productos", productosRouter);
-app.use("/api/carrito", carritoRouter);
-
+app.use("/productos", productosRouter);
 
 /////////////////////////
 // SERVER ON ////////////
