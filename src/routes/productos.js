@@ -1,32 +1,38 @@
 import express from 'express';
 import { Router } from 'express';
-import Contenedor from '../../constructor.js';
-
+import connection from '../../dbConnection/db.js';
+import DBContainer from '../../dbConnection/contenedor.js';
+const DB = new DBContainer(connection, 'products');
 const router = Router();
-const constructor = new Contenedor("./data/productos.txt");
+const app = express();
+app.use(express.json());
 
-router.get("/", (req, res) => {
+
+router.get("/", async (req, res) => {
   try {
-    res.send(constructor.getAll());
+    const data = await DB.getAll()
+    res.send(data);
   } catch (err) {
     res.status(404).send(err);
   }
 });
 
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    res.send(constructor.getById(parseInt(id)));
+    const data = await DB.getById(id);
+    res.send(data);
   } catch (err) {
     res.status(404).send(err);
   }
 });
 
-router.post("/", (req, res) => {
+
+router.post("/", async (req, res) => {
   try {
     const data = req.body;
-    constructor.save(data);
-    res.redirect("/");
+    await DB.add(data);
+    res.send(data);
   } catch (err) {
     res.status(404).send(err);
   }
@@ -37,16 +43,18 @@ router.put("/:id", (req, res) => {
     const { id } = req.params;
     const prodNuevo = req.body;
     const idInt = parseInt(id);
-    res.send(constructor.updateById(idInt, prodNuevo));
+    DB.update(idInt, prodNuevo);
+    res.send(`Producto con id ${id} actualizado`);
   } catch (err) {
     res.status(404).send(err.msg);
   }
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    res.send(constructor.deleteById(parseInt(id)));
+    await DB.delete(id);
+    res.send(`El producto con id ${id} fue eliminado`);
   } catch (err) {
     res.status(404).send(err.msg);
   }

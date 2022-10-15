@@ -3,8 +3,8 @@ const connection = {
     connection:
     {
         host: "localhost",
-        user: "root",
-        password: "root",
+        user: "claudio",
+        password: "_pLhyp/@9HkqJBnU",
         database: "ecommerce",
         port: 3306
     }

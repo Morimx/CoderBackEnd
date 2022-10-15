@@ -4,12 +4,6 @@ import handlebars from "express-handlebars";
 import fs from 'fs';
 const app = express();
 
-//Config DB
-import knex from 'knex';
-import connection from './dbConnection/db.js';
-const dbConnection = knex(connection)
-
-
 // Constructor de productos y router
 import Contenedor from './constructor.js';
 const constructor = new Contenedor("./data/productos.txt");
@@ -18,8 +12,6 @@ import { productosRouter } from './src/routes/productos.js';
 //Socket server
 import { Server } from 'socket.io';
 import { createServer } from 'http';
-//const { Server: SocketServer } = require("socket.io");
-//const { Server: HttpServer } = require("http");
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
@@ -81,6 +73,7 @@ app.get("/", (req, res) => {
     partialsPath: "./views/partials",
   });
 });
+
 
 /////////////////////////
 // EXPRESS ROUTER ///////
