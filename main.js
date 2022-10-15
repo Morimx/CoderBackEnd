@@ -37,12 +37,12 @@ let mensajes = [{ email: "bienvenida@chat.com", msg: "Bienvenido al chat", date:
 io.on("connection", async (socket) => {
   console.log("Se ha conectado un cliente");
   socket.emit('new-message', mensajes);
-  socket.emit('new-product', await DBMensajes.getAll());
   socket.on('new-message', async (data) => {
     await DBMensajes.add(data);
     mensajes.push(data);
     io.sockets.emit('new-message', mensajes);
   });
+  socket.emit('new-product', await DBProductos.getAll());
   socket.on('new-product', async (data) => {
     await DBProductos.add(data);
     const productos = await DBProductos.getAll();
