@@ -8,8 +8,9 @@ const KnexSQLite3 = knex(sqliteConfig)
 
 KnexSQLite3.schema.createTableIfNotExists("messages", (table) => {
     table.increments("id");
+    table.string("date");
     table.string("email");
-    table.string("message");
+    table.string("msg");
 }).then(() => {
     console.log("Table created");
 }).catch((err) => {

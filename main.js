@@ -1,12 +1,18 @@
 //Libs
 import express from 'express';
 import handlebars from "express-handlebars";
-import fs from 'fs';
 const app = express();
 
+// DB
+import DBContainer from './dbConnection/contenedor.js';
+import mysqlconnection from './dbConnection/db.js';
+import sqliteConfig from './dbConnection/SQLite3.js';
+sqliteConfig.connection.filename = "./DB/ecommerce.sqlite"
+const DBMensajes = new DBContainer(sqliteConfig, 'messages');
+const DBProductos = new DBContainer(mysqlconnection, 'products');
+
 // Constructor de productos y router
-import Contenedor from './constructor.js';
-const constructor = new Contenedor("./data/productos.txt");
+
 import { productosRouter } from './src/routes/productos.js';
 
 //Socket server
@@ -28,21 +34,18 @@ let mensajes = [{ email: "bienvenida@chat.com", msg: "Bienvenido al chat", date:
 // SOCKET IO ////////////
 /////////////////////////
 
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
   console.log("Se ha conectado un cliente");
   socket.emit('new-message', mensajes);
-  socket.emit('new-product', constructor.getAll());
-  socket.on('new-message', (data) => {
+  socket.emit('new-product', await DBMensajes.getAll());
+  socket.on('new-message', async (data) => {
+    await DBMensajes.add(data);
     mensajes.push(data);
     io.sockets.emit('new-message', mensajes);
-    fs.writeFile('./data/mensajes.txt', JSON.stringify(mensajes), (err) => {
-      if (err) throw err;
-      console.log('The file has been saved!');
-    });
   });
   socket.on('new-product', async (data) => {
-    await constructor.save(data);
-    const productos = await constructor.getAll();
+    await DBProductos.add(data);
+    const productos = await DBProductos.getAll();
     io.sockets.emit('new-product', productos);
   });
 });
@@ -62,13 +65,13 @@ app.engine(
 app.set("views", "./views");
 app.set("view engine", "hbs");
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   res.render("root", {
     layout: "root",
     title: "Página principal",
     Precio: "Precio",
     addProd: "Añadir Producto",
-    compras: constructor.getAll().sort((a, b) => a.id - b.id),
+    compras: await DBProductos.getAll(),
     noProd: "No hay productos",
     partialsPath: "./views/partials",
   });
