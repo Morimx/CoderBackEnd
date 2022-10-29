@@ -1,22 +1,8 @@
-import mongoose from "mongoose";
-import admin from "firebase-admin";
-
-const MongoConnection = async () => {
-    try {
-        const db = await mongoose.connect('mongodb://localhost:27017/ecommerce', {
-            serverSelectionTimeoutMS: 5000,
-        });
-        console.log("DB connected");
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 const config = {
     SQLite3: {
         client: 'sqlite3',
         connection: {
-            filename: '../../DB/ecommerce.sqlite'
+            filename: './DB/ecommerce.sqlite'
         },
         useNullAsDefault: true
     },
@@ -31,7 +17,12 @@ const config = {
             port: 3306
         }
     },
-    Mongo: MongoConnection,
+    Mongo: {
+        uri: "mongodb://localhost:27017/ecommerce",
+        options: {
+            serverSelectionTimeoutMS: 5000,
+        }
+    },
     FireBase: {
         "type": "service_account",
         "project_id": "coderback-21c69",
@@ -45,11 +36,6 @@ const config = {
         "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-y2kgm%40coderback-21c69.iam.gserviceaccount.com"
     }
 }
-
-admin.initializeApp({
-    credential: admin.credential.cert(config.FireBase),
-    databaseURL: "https://coderback-21c69.firebaseio.com"
-});
 
 
 

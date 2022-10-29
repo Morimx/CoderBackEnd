@@ -1,9 +1,10 @@
 //Config DB
 import knex from 'knex';
-import config from '../config.js';
+import config from "../../configdb.js";
 
 const KnexMySQL = knex(config.MySQL)
 const KnexSQLite3 = knex(config.SQLite3)
+
 
 KnexSQLite3.schema.createTableIfNotExists("messages", (table) => {
     table.increments("id");

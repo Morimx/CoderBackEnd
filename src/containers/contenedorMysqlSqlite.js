@@ -1,12 +1,13 @@
 import knex from "knex";
+import config from "../../configdb.js";
 
-class DBContainer {
+class CRUDMysqlSQLIte {
     constructor(config, tabla) {
         this.knex = knex(config);
         this.table = tabla;
     }
 
-    async getAll() {
+    async read() {
         try {
             return await this.knex.from(this.table).select("*");
         } catch (err) {
@@ -14,7 +15,7 @@ class DBContainer {
         }
     }
 
-    async getById(id) {
+    async readById(id) {
         try {
             return await this.knex.from(this.table).select("*").where("id", id);
         } catch (err) {
@@ -22,7 +23,7 @@ class DBContainer {
         }
     }
 
-    async add(data) {
+    async create(data) {
         try {
             return await this.knex.insert(data).into(this.table);
         } catch (err) {
@@ -55,4 +56,7 @@ class DBContainer {
     }
 }
 
-export default DBContainer;
+
+export default CRUDMysqlSQLIte;
+
+

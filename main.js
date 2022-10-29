@@ -4,12 +4,10 @@ import handlebars from "express-handlebars";
 const app = express();
 
 // DB
-import DBContainer from './dbConnection/contenedor.js';
-import mysqlconnection from './dbConnection/db.js';
-import sqliteConfig from './dbConnection/SQLite3.js';
-sqliteConfig.connection.filename = "./DB/ecommerce.sqlite"
-const DBMensajes = new DBContainer(sqliteConfig, 'messages');
-const DBProductos = new DBContainer(mysqlconnection, 'products');
+import CRUDMysqlSQLIte from './src/containers/contenedorMysqlSqlite.js';
+import config from "./configdb.js";
+const DBMensajes = new CRUDMysqlSQLIte(config.SQLite3, 'messages');
+const DBProductos = new CRUDMysqlSQLIte(config.MySQL, 'products');
 
 // Constructor de productos y router
 
@@ -38,14 +36,14 @@ io.on("connection", async (socket) => {
   console.log("Se ha conectado un cliente");
   socket.emit('new-message', mensajes);
   socket.on('new-message', async (data) => {
-    await DBMensajes.add(data);
+    await DBMensajes.create(data);
     mensajes.push(data);
     io.sockets.emit('new-message', mensajes);
   });
-  socket.emit('new-product', await DBProductos.getAll());
+  socket.emit('new-product', await DBProductos.read());
   socket.on('new-product', async (data) => {
-    await DBProductos.add(data);
-    const productos = await DBProductos.getAll();
+    await DBProductos.create(data);
+    const productos = await DBProductos.read();
     io.sockets.emit('new-product', productos);
   });
 });
@@ -71,7 +69,7 @@ app.get("/", async (req, res) => {
     title: "Página principal",
     Precio: "Precio",
     addProd: "Añadir Producto",
-    compras: await DBProductos.getAll(),
+    compras: await DBProductos.read(),
     noProd: "No hay productos",
     partialsPath: "./views/partials",
   });
