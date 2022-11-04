@@ -4,16 +4,20 @@ console.log(process.env.TIPO_DB)
 
 const daos = {
     Mongo: async () => {
-        const { default: daoMongo } = await import("./daoMongo.js");
-        return new daoMongo();
-    },
-    Mysql: async () => {
-        const { default: daoMysql } = await import("./daoMysql.js");
-        return new daoMysql();
+        const { default: daoMongoProd } = await import("./productos/daoMongo.js");
+        const { default: daoMongoCart } = await import("./carrito/daoMongo.js");
+        return {
+            productos: new daoMongoProd(),
+            carrito: new daoMongoCart(),
+        };
     },
     Firebase: async () => {
-        const { default: daoFirebase } = await import("./daoFirebase.js");
-        return new daoFirebase();
+        const { default: daoFirebaseProd } = await import("./productos/daoFirebase.js");
+        const { default: daoFirebaseCart } = await import("./carrito/daoFirebase.js");
+        return {
+            productos: new daoFirebaseProd(),
+            carrito: new daoFirebaseCart(),
+        };
     },
     Sqlite: async () => {
         const { default: daoSqlite } = await import("./daoSQLite3.js");
@@ -22,3 +26,4 @@ const daos = {
 }
 
 export default daos[process.env.TIPO_DB]();
+

@@ -1,4 +1,4 @@
-import CRUDMongo from "../containers/contenedorMongo.js";
+import CRUDMongo from "../../containers/contenedorMongo.js";
 
 class daoMongo extends CRUDMongo {
     constructor() {

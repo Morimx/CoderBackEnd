@@ -9,9 +9,9 @@ admin.initializeApp({
 const db = admin.firestore();
 
 class CRUDFireBase {
-    constructor() {
+    constructor(collection) {
         this.db = db;
-        this.collection = db.collection("carrito");
+        this.collection = db.collection(collection);
     }
 
     async create(data) {

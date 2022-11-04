@@ -1,22 +1,4 @@
 const config = {
-    SQLite3: {
-        client: 'sqlite3',
-        connection: {
-            filename: './DB/ecommerce.sqlite'
-        },
-        useNullAsDefault: true
-    },
-    MySQL: {
-        client: 'mysql',
-        connection:
-        {
-            host: "localhost",
-            user: "claudio",
-            password: "_pLhyp/@9HkqJBnU",
-            database: "ecommerce",
-            port: 3306
-        }
-    },
     Mongo: {
         uri: "mongodb://localhost:27017/ecommerce",
         options: {
