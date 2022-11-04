@@ -18,12 +18,9 @@ const daos = {
             productos: new daoFirebaseProd(),
             carrito: new daoFirebaseCart(),
         };
-    },
-    Sqlite: async () => {
-        const { default: daoSqlite } = await import("./daoSQLite3.js");
-        return new daoSqlite();
     }
-}
+};
+
 
 export default daos[process.env.TIPO_DB]();
 
