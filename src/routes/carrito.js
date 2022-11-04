@@ -31,7 +31,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", isAuthorized, async (req, res) => {
     try {
         const data = req.body;
-        await carrito.create(data);
+        await carrito.createCart(data);
         res.send(data);
     } catch (err) {
         res.status(404).send(err);

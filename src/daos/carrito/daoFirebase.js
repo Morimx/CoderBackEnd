@@ -7,7 +7,7 @@ class daoFirebase extends CRUDFireBase {
 
     async createCart() {
         try {
-            const cart = await this.create({ items: [] });
+            const cart = await this.create({ products: [] });
             return cart;
         } catch (err) {
             console.log(err);
@@ -24,9 +24,19 @@ class daoFirebase extends CRUDFireBase {
         }
     }
 
-    async addProduct(cartId, productId) {
+    // async addProduct(cartId, data) {
+    //     try {
+    //         await this.update(cartId, { product: data });
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // }
+
+    async addProduct(cartId, data) {
         try {
-            await this.update(cartId, { product: productId });
+            const cart = await this.readById(cartId);
+            const newCart = [...cart.products, data];
+            await this.update(cartId, { products: newCart });
         } catch (err) {
             console.log(err);
         }

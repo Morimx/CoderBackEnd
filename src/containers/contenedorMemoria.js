@@ -8,7 +8,7 @@ class CRUDMemoria {
     }
 
     read() {
-        return this.memorias;
+        return this.memoria;
     }
 
     readById(id) {
@@ -16,8 +16,8 @@ class CRUDMemoria {
     }
 
     update(id, memoria) {
-        const index = thi.memorias.findIndex(memoria => memoria.id === id);
-        this.memorias[index] = memoria;
+        const index = this.memorias.findIndex(memoria => memoria.id === id);
+        this.memoria[index] = memoria;
     }
 
     delete(id) {
