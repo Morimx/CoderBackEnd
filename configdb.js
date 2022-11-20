@@ -3,6 +3,7 @@ const config = {
         uri: "mongodb://localhost:27017/ecommerce",
         options: {
             serverSelectionTimeoutMS: 500000,
+            useNewUrlParser: true,
         }
     }
 }

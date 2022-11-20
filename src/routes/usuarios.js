@@ -2,21 +2,12 @@ import express from 'express';
 import { Router } from 'express';
 import isLoggedIn from '../../middlewares/log.js';
 import daoMongo from '../daos/usuarios/daoMongo.js';
-import bcrypt from 'bcrypt';
 const daoUsuarios = new daoMongo();
 const router = Router();
 const app = express();
 app.use(express.json());
 
-const PassHashed = (pass) => {
-    bcrypt.hash(pass, 10, (err, hash) => {
-        if (err) {
-            console.log(err);
-        } else {
-            return hash;
-        }
-    });
-}
+
 
 
 router.get('/login', isLoggedIn, (req, res) => {
