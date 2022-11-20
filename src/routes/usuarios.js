@@ -12,10 +12,8 @@ app.use(express.json());
 passport.use(
     "signup",
     new LocalStrategy({ passReqToCallback: true }, (req, username, password, done) => {
-        console.log(username, password);
         Users.findOne({ username }, (err, user) => {
             if (user) return done(null, false);
-
             Users.create(
                 { username, password: PassHashed(password) },
                 (err, user) => {
