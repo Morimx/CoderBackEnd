@@ -8,6 +8,8 @@ import MongoStore from 'connect-mongo';
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { fork } from "child_process";
+import { cpus } from "os";
+import cluster from 'cluster';
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const app = express();
@@ -24,10 +26,11 @@ const DBProductos = new DBContainer(mysqlconnection, 'products');
 import Yargs from 'yargs/yargs';
 const yargs = Yargs(process.argv.slice(2));
 
-const serverPort = yargs.alias({
+const serverData = yargs.alias({
   p: "port",
+  m: "modo"
 }).default(
-  { port: 8080 }
+  { port: 8080, modo: "fork" }
 ).argv
 
 // routers
@@ -136,7 +139,8 @@ app.use("/info", (req, res) => {
     memory: process.memoryUsage().rss,
     path: process.cwd(),
     processID: process.pid,
-    proyectFolder: __dirname
+    proyectFolder: __dirname,
+    cpus: cpus().length,
   })
 })
 
@@ -182,6 +186,29 @@ if (CON_CHILD_PROCESS_FORK) {
 ///////////////////////
 // SERVER ON ////////////
 /////////////////////////
-httpServer.listen(serverPort.port, () => {
-  console.log("Server escuchando en el puerto " + serverPort.port);
-});
+const cpu = cpus().length;
+
+if (serverData.m == "cluster") {
+  if (cluster.isPrimary) {
+    console.log(`Primary ${process.pid} is running`);
+
+    // Fork workers.
+    for (let i = 0; i < 3; i++) {
+      cluster.fork();
+    }
+    cluster.on('exit', (worker, code, signal) => {
+      console.log(`worker ${worker.process.pid} died`);
+      //cluster.fork()
+    });
+  } else {
+    httpServer.listen(serverData.port, () => {
+      console.log(`Servidor http escuchando en el puerto ${serverData.port}! en modo ${serverData.m} en el worker ${process.pid}`)
+    });
+  }
+}
+else {
+  httpServer.listen(serverData.port, () => {
+    console.log(`Servidor http escuchando en el puerto ${serverData.port}! en modo ${serverData.m}`)
+  });
+}
+

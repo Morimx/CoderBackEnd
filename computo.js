@@ -12,4 +12,4 @@ function calculo(cant) {
 process.on("message", (message) => {
     process.send({ id: message.id, ...calculo(message.data) });
 });
-console.log(`PID CHILD_PROCESS FORK ${process.pid}`);
+;
